@@ -1,0 +1,13 @@
+PASS: USB handshake, five disabled channels, network read, password hidden
+PASS: All three pairs: frequency range, constant duty endpoints, frequency zero, outputs disabled
+PASS: Both multifunction channels: all five modes applied and read back while disabled
+PASS: Invalid timing, non-finite numbers, pulse limits and channel IDs rejected without state changes
+PASS: Concurrent internal 255-pulse bursts completed; long sequences cancelled by Stop All; external GPIOs held LOW
+PASS: Web page reachable; web Apply visible over USB and USB Apply visible over HTTP; web Stop All
+PASS: Static IP settings saved in flash, restored after hardware reset, and Wi-Fi reconnected at the same address
+PASS: SSID with spaces, Unicode and URL-reserved characters persisted across reset; USB works without Wi-Fi
+PASS: Original SSID, saved password and DHCP mode restored, verified again after reset
+PASS: Invalid static network and short password rejected without changing saved settings
+FINAL NETWORK: {"connected": true, "currentIP": "192.168.178.55", "dhcp": true, "passwordSet": true}
+CLEANUP: original channel settings restored; all outputs OFF
+TOTAL: 10 live checks passed

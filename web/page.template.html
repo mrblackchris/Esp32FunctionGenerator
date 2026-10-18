@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ESP32 Function Generator</title><link rel="stylesheet" href="style.css"><link rel="icon" href="data:,"></head>
+<body><main><h1>ESP32 Function Generator</h1><p>Three independent high/low pairs · Two selectable waveform outputs</p>
+<section class="connection" aria-label="Device connection">
+<div class="toolbar"><label>Connection<select id="connectionMode"><option value="serial">USB serial</option><option value="http">Wi-Fi / HTTP</option></select></label><label id="deviceAddressLabel" hidden>ESP32 address<input id="deviceAddress" placeholder="http://192.168.1.50"></label><button id="connect">Connect</button><button id="disconnect" class="secondary" disabled>Disconnect</button><span id="connectionBadge" class="pill">Not connected</span><span>USB: 115200 baud · Wi-Fi: HTTP</span><a href="#channels">Outputs</a><a href="#network">Wi-Fi &amp; IP</a><button class="stop" id="stopAll" disabled>Stop all outputs</button></div>
+<p id="status" role="status" aria-live="polite">Choose USB serial or enter the ESP32 HTTP address to read its settings. Close Serial Monitor and the Python GUI first.</p>
+<p id="unsupported" hidden>USB serial is unavailable here. Open this page in desktop Chrome or Edge through localhost or HTTPS.</p>
+</section>
+<section class="network" id="network" aria-label="Wi-Fi and IP settings">
+<div class="toolbar"><h2>Wi-Fi &amp; IP settings</h2><button type="button" id="networkRead" class="secondary" disabled>Reload saved settings</button></div>
+<p id="networkStatus" class="actual" role="status">Connect USB to read the ESP32 network name, connection status and IP address.</p>
+<details id="networkDetails"><summary>Edit saved Wi-Fi and IP settings</summary>
+<form id="networkForm" autocomplete="off"><fieldset id="networkEdit" disabled>
+<div class="network-grid"><div>
+<label>Wi-Fi name (SSID)<input name="ssid" type="text" maxlength="32" required autocomplete="off"></label>
+<label><span>Replace saved password</span><input name="replacePassword" type="checkbox"></label>
+<label>New password<input name="password" type="password" disabled autocomplete="new-password" placeholder="Existing password is kept"></label>
+<label>Show new password<input id="showPassword" type="checkbox"></label>
+<small>The stored password is never read back. Select Replace and leave the new password empty only for an open network.</small>
+</div><div>
+<label>Automatic IP address (DHCP)<input name="dhcp" type="checkbox" checked></label>
+<label>Static IP address<input name="ip" type="text" inputmode="decimal" placeholder="192.168.1.100" disabled></label>
+<label>Gateway<input name="gateway" type="text" inputmode="decimal" placeholder="192.168.1.1" disabled></label>
+<label>Subnet mask<input name="subnet" type="text" inputmode="decimal" placeholder="255.255.255.0" disabled></label>
+<label>DNS server<input name="dns" type="text" inputmode="decimal" placeholder="192.168.1.1" disabled></label>
+</div></div>
+</fieldset><p id="networkFeedback" role="status">Saved on the ESP32 and restored after power-off. Reload replaces pending network edits.</p>
+<button type="submit" id="networkSave" disabled>Save &amp; reconnect Wi-Fi</button>
+<small>Saving reconnects Wi-Fi without rebooting or changing the outputs. USB stays available even if Wi-Fi cannot connect.</small>
+</form></details></section>
+<p class="mapping"><strong>Pin mapping:</strong> Pairs: GPIO18/19, GPIO21/22, GPIO23/32. Multifunction outputs: GPIO25/26.</p>
+<p id="empty">Channel controls appear here after connecting to your ESP32.</p><div id="channels" class="grid"></div>
+<p>All outputs start OFF. Pair frequency 0 disables both sides. At 0% duty the low side is continuously HIGH; at 100% the high side is continuously HIGH when enabled.</p>
+<p>Pulse and burst outputs are 3.3 V logic. Analog waveforms use an 8-bit DAC, centered near half the supply voltage; amplitude is a percentage of its nominal full range. The raw DAC is not a calibrated or 50 Ω laboratory output.</p>
+<p>Analog modes: requested 10–5000 Hz, rounded in about 9.77 Hz steps, at 40000 samples/second per channel. Waveforms become coarser toward 5000 Hz. Changing one analog channel briefly restarts any other active analog channel.</p>
+<p><small>This page controls the ESP32 over USB serial or HTTP over TCP/IP. Closing or disconnecting leaves the last applied output state in place. Use Stop all outputs first if desired.</small></p>
+</main><script src="channel-forms.js"></script><script type="module" src="app.mjs"></script></body></html>

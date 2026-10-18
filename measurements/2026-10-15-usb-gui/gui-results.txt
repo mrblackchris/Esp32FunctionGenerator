@@ -1,0 +1,6 @@
+PASS actual GUI connects and reads all five channels and network
+PASS GUI Apply reaches real hardware, readback confirmed, pending edits preserved; pair restored
+PASS real GUI mode selection and Apply for every multifunction mode on both outputs, all disabled
+PASS GUI reads and saves actual Wi-Fi settings, password hidden/kept
+PASS GUI Stop All acknowledged and background status polling continues
+PASS GUI disconnect and serial port released; all outputs remain OFF

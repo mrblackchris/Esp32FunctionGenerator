@@ -1,0 +1,8 @@
+PASS: PC page connects to actual ESP32 through browser serial stream adapter; all five channels and network read
+PASS: Channel Apply/readback on hardware; other pending edits preserved; original settings restored
+PASS: All five waveform modes applied on both real channels while disabled; burst Apply/Start state correct
+PASS: Firmware validation errors shown on page and rejected settings restored
+PASS: Same-page Wi-Fi read/save reaches ESP32; password hidden/kept; invalid replacement rejected
+PASS: Network polling preserves pending edits; explicit reload reads saved values
+PASS: Stop All confirmed; responsive page fits a 390px viewport without horizontal scrolling
+PASS: Disconnect/reconnect and resumed background polling work against real hardware
